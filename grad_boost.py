@@ -13,8 +13,8 @@ y = df['SalePrice']
 X_train, X_test, y_train, y_test = train_test_split(X_Data, y, test_size = 0.2)
 
 ensemble = []
-num_of_learners = 5
-depth = 3
+num_of_learners = int(input("Enter number of learners: "))
+depth = int(input("Enter max depth of learners: "))
 # creating the ensemble of learners
 for i in range(num_of_learners):
     ensemble.append(DecisionTreeRegressor(max_depth = 3))
