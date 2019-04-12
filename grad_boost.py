@@ -21,13 +21,14 @@ for i in range(num_of_learners):
 
 # training (I think idk I'm stupid pls help)
 ensemble[0].fit(X_train,y_train)
-predictions = np.array([ensemble[0].predict(X_test)])
+predictions = ensemble[0].predict(X_test)
+print("Predictions: ", len(predictions))
 print("Shape of predictions: ",predictions.shape)
-print("Y shape: ", y_train.shape)
-residue = y - predictions
+print("Y shape: ", y_test.shape)
+residue = y_test - predictions
 for i in range(1, num_of_learners):
-    ensemble[i].fit(X_Data, residue)
-    predictions = np.array([ensemble[i].predict(X_test)])
-    residue = y - predictions
+    ensemble[i].fit(X_train[:len(residue)], residue)
+    predictions = ensemble[i].predict(X_test)
+    residue = y_test - predictions
     valid = r2_score(y_test, ensemble[i].predict(X_test))
     print("Validation: ", valid)
